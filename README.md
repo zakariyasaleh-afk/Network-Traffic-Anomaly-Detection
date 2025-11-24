@@ -3,9 +3,7 @@
 ## Project Overview
 This project implements a Network Intrusion Detection System (NIDS) using the **NSL-KDD dataset** and the **XGBoost classifier**. It performs both **multi-class** and **binary classification** to detect attacks in network traffic, providing insights into attack types and key features influencing anomalies.
 
-## Features
-
-### Dataset
+## Dataset
 - **Source:** NSL-KDD (Kaggle)
 - **Training file:** KDDTrain+.txt  
 - **Testing file:** KDDTest+.txt  
