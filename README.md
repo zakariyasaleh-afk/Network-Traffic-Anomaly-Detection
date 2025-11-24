@@ -5,19 +5,17 @@ This project implements a Network Intrusion Detection System (NIDS) using the **
 
 ## Features
 
-### Data Handling
-- Loads **NSL-KDD dataset** from Kaggle.
-- Converts raw `.txt` files into `.csv` for easier processing.
-- Splits data into features (`X`) and labels (`y`).
+### Dataset
+- **Source:** NSL-KDD (Kaggle)
+- **Training file:** KDDTrain+.txt  
+- **Testing file:** KDDTest+.txt  
+- **Features:** 41  
+- **Labels:** multiple attack categories + normal  
+- **Handling unseen labels:** test samples with labels not present in training are removed automatically.
 
 ### Data Preprocessing
 - Encodes categorical features (`protocol_type`, `service`, `flag`) using `LabelEncoder`.
 - Handles unseen labels in the test set gracefully.
-
-### Exploratory Data Analysis (EDA)
-- Visualizes **class distribution** of the training set using log-scale plots.
-- Shows **attack type distribution** in the dataset.
-- Provides **summary statistics** of network traffic features.
 
 ### Model Training
 - Uses **XGBoost classifier** with the following hyperparameters:
