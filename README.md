@@ -32,7 +32,8 @@ A machine learning project that classifies network traffic as Normal or Attack u
 - Top features: `count`, `srv_count`, `src_bytes`, `dst_bytes`, `protocol_type`, `flag`, `serror_rate`, `rerror_rate`
 
 ### Confusion Matrix (Binary)
-<img width="400" height="400" src="images/binary_confusion_matrix.png" />
+<img width="522" height="470" alt="image" src="https://github.com/user-attachments/assets/c5ec70b1-02d2-4e91-99bc-0a5de3a2390d" />
+
 
 ### Feature Importance
 <img width="400" height="400" src="images/feature_importance.png" />
