@@ -39,7 +39,7 @@ This project implements a Network Intrusion Detection System (NIDS) using the **
   - Classification report:
   <img width="402" height="147" alt="Screenshot 2025-11-24 233225" src="https://github.com/user-attachments/assets/675863f1-c939-45eb-bd50-0ae0e192467c" />
 
-- **Binary Confusion Matrices**:
+- **Binary Confusion Matrix**:
 <img width="522" height="470" alt="image" src="https://github.com/user-attachments/assets/814a5cfc-12cc-4921-84e2-2171b12ac65b" />
 
 
