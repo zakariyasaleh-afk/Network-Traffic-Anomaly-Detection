@@ -1,94 +1,61 @@
-# Network Anomaly Detection Using XGBoost on NSL-KDD Dataset
+# NSL-KDD Network Intrusion Detection Using XGBoost
 
-Detecting network intrusions and anomalies using machine learning. This project implements an **XGBoost classifier** to identify normal and attack traffic using the NSL-KDD dataset.
+## Project Overview
+This project implements a Network Intrusion Detection System (NIDS) using the **NSL-KDD dataset** and the **XGBoost classifier**. It performs both **multi-class** and **binary classification** to detect attacks in network traffic, providing insights into attack types and key features influencing anomalies.
 
----
+## Features
 
-## Dataset
-- **Source:** [NSL-KDD Dataset](https://www.kaggle.com/datasets/hassan06/nslkdd)  
-- **Type:** Network traffic flows  
-- **Training set:** `KDDTrain+.txt` (~125,973 samples)  
-- **Test set:** `KDDTest+.txt` (~22,544 samples)  
-- **Classes:** Normal traffic + 37 attack types  
-- **Purpose:** Evaluate anomaly detection and classification performance  
+### Data Handling
+- Loads **NSL-KDD dataset** from Kaggle.
+- Converts raw `.txt` files into `.csv` for easier processing.
+- Splits data into features (`X`) and labels (`y`).
 
----
+### Data Preprocessing
+- Encodes categorical features (`protocol_type`, `service`, `flag`) using `LabelEncoder`.
+- Handles unseen labels in the test set gracefully.
 
-## Data Preprocessing
-- Removed `label` and `difficulty_level` from features.  
-- Encoded categorical features (`protocol_type`, `service`, `flag`) using **Label Encoding**.  
-- Filtered test samples that contain attack types **not present in training set**.  
-- No additional feature engineering was performed; all features are original from NSL-KDD.  
+### Exploratory Data Analysis (EDA)
+- Visualizes **class distribution** of the training set using log-scale plots.
+- Shows **attack type distribution** in the dataset.
+- Provides **summary statistics** of network traffic features.
 
----
+### Model Training
+- Uses **XGBoost classifier** with the following hyperparameters:
+  - `n_estimators=300`
+  - `max_depth=6`
+  - `learning_rate=0.1`
+  - `use_label_encoder=False`
+  - `eval_metric='mlogloss'`
+  - `random_state=42`
+  - `n_jobs=-1`
+- Trains on the processed training dataset.
+- Predicts both **multi-class** (specific attack type) and **binary** (normal vs attack) labels.
 
-## Model
-- **Algorithm:** XGBoost Classifier (`XGBClassifier`)  
-- **Parameters:**  
-  - `n_estimators=300`  
-  - `max_depth=6`  
-  - `learning_rate=0.1`  
-  - `eval_metric='mlogloss'`  
-  - `use_label_encoder=False`  
-- Multi-class classification across all known attack types.  
-- Binary classification derived from mapping `normal` → 0, `attack` → 1.
+### Evaluation
+- **Multi-Class Classification**:
+  - Test Accuracy: `0.865` 
+  - Classification report:
+    <img width="411" height="488" alt="Screenshot 2025-11-24 233405" src="https://github.com/user-attachments/assets/e78486bd-2217-4f35-b9f9-1f36bb22f7fa" />
 
----
+- **Binary Classification (Normal vs Attack)**:
+  - Test Accuracy: `0.871`
+  - Classification report:
+    <img width="402" height="147" alt="Screenshot 2025-11-24 233225" src="https://github.com/user-attachments/assets/675863f1-c939-45eb-bd50-0ae0e192467c" />
 
-## Training & Evaluation
-- Trained on **entire training set**.  
-- Evaluated on **filtered test set** (only attack types seen during training).  
+- **Binary Confusion Matrices**:
+  <img width="522" height="470" alt="image" src="https://github.com/user-attachments/assets/814a5cfc-12cc-4921-84e2-2171b12ac65b" />
 
-### Results
 
-**Binary Classification (Normal vs Attack):**
-- **Accuracy:** 0.871  
-- Confusion matrix visualized using Seaborn.  
+### Top Network Features
+<img width="489" height="329" alt="Screenshot 2025-11-24 233014" src="https://github.com/user-attachments/assets/ba90a0ca-4083-499b-8226-6909a71be099" />
 
-**Multi-class Classification:**
-- Classification report with precision, recall, and F1-score per attack type.
+## Dependencies
+- Python 3.x
+- pandas
+- numpy
+- matplotlib
+- seaborn
+- scikit-learn
+- xgboost
 
----
-
-## Feature Importance
-- Top 10 features contributing to classification:
-
-| Feature        | Description                                      | Importance |
-|----------------|--------------------------------------------------|-----------|
-| count          | Number of connections from a host                | 0.XXX     |
-| srv_count      | Number of connections to a specific service     | 0.XXX     |
-| src_bytes      | Data volume sent by host                          | 0.XXX     |
-| dst_bytes      | Data volume received by host                     | 0.XXX     |
-| protocol_type  | Protocol used (TCP/UDP/ICMP)                    | 0.XXX     |
-| flag           | Connection status flags                           | 0.XXX     |
-| serror_rate    | Rate of TCP connection errors                     | 0.XXX     |
-| rerror_rate    | Rate of failed connections                        | 0.XXX     |
-| same_srv_rate  | Proportion of connections to same service       | 0.XXX     |
-| diff_srv_rate  | Proportion of connections to different services | 0.XXX     |
-
-*Importance scores are derived from XGBoost feature importance.*
-
----
-
-## Visualization
-- Class distribution in training set shown using log-scaled count plots.  
-- Attack type distribution plotted for exploratory analysis.  
-- Binary confusion matrix heatmap visualized for Normal vs Attack classification.
-
----
-
-## Usage
-1. **Download model:** `xgb_nslkdd_model.pkl`  
-2. **Load in Python:**
-
-```python
-import joblib
-clf = joblib.load("xgb_nslkdd_model.pkl")
-
-# Example: predict using new network traffic sample
-import numpy as np
-
-sample = np.array([[...feature_values...]])
-prediction = clf.predict(sample)
-print("Prediction:", prediction[0])
 
