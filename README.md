@@ -43,8 +43,23 @@ This project implements a Network Intrusion Detection System (NIDS) using the **
 <img width="522" height="470" alt="image" src="https://github.com/user-attachments/assets/814a5cfc-12cc-4921-84e2-2171b12ac65b" />
 
 
-### Top Network Features
-<img width="489" height="329" alt="Screenshot 2025-11-24 233014" src="https://github.com/user-attachments/assets/ba90a0ca-4083-499b-8226-6909a71be099" />
+
+## Top 10 Feature Importances
+
+| Feature                         | Importance Score | Description 
+|---------------------------------|-----------------|----------------------------------------------
+| same_srv_rate                   | 0.509           | Proportion of connections to the same service 
+| wrong_fragment                  | 0.063           | Number of wrong fragments in the connection  
+| diff_srv_rate                   | 0.059           | Proportion of connections to different services 
+| rerror_rate                     | 0.056           | Rate of failed connections or requests 
+| src_bytes                       | 0.050           | Data volume sent by the host 
+| dst_host_srv_diff_host_rate     | 0.033           | Rate of connections to different hosts for the same service 
+| num_compromised                 | 0.033           | Number of compromised conditions 
+| protocol_type                   | 0.030           | Type of protocol (TCP/UDP/ICMP)  
+| count                           | 0.018           | Number of connections from the host                                     
+| dst_host_diff_srv_rate          | 0.017           | Proportion of connections to different services at the destination host 
+
+
 
 ## Dependencies
 - Python 3.x
