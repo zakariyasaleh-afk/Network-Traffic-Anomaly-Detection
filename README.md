@@ -10,7 +10,6 @@ This project implements a Network Intrusion Detection System (NIDS) using the **
 - **Testing file:** KDDTest+.txt  
 - **Features:** 41  
 - **Labels:** multiple attack categories + normal  
-- **Handling unseen labels:** test samples with labels not present in training are removed automatically.
 
 ### Data Preprocessing
 - Encodes categorical features (`protocol_type`, `service`, `flag`) using `LabelEncoder`.
